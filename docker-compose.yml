@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  postgres_db:
+    image: postgres:latest
+    container_name: PostgresCont
+    restart: always
+    environment:
+       POSTGRES_USER: docker
+       POSTGRES_PASSWORD: docker
+       POSTGRES_DB: spring_test
+       PGPORT: 4002
+    expose:
+      - '4002'
+    ports:
+      - '4002:4002'
+    volumes:
+      - postgres_volume:/var/lib/postgresql/data
+    networks:
+      - postgres_network
+volumes:
+  postgres_volume:
+    driver: local
+networks:
+    postgres_network:
+      driver: bridge
